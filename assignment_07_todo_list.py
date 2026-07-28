@@ -79,3 +79,93 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def add_task(tasks):
+    # Ask the user to enter a task description.
+    # Add the task to the list and confirm that it was added.
+    task = input("Enter task: ")
+
+    tasks.append(task)
+
+    print('Task added: "' + task + '"')
+
+
+def view_tasks(tasks):
+    # Check if the task list is empty.
+    # If it is empty, display a friendly message.
+    if len(tasks) == 0:
+        print("Your task list is empty.")
+        return
+
+    # Display all tasks with their corresponding numbers.
+    print("Your Tasks:")
+    for i in range(len(tasks)):
+        print(str(i + 1) + ". " + tasks[i])
+
+
+def delete_task(tasks):
+    # Check if there are any tasks available to delete.
+    if len(tasks) == 0:
+        print("No tasks available to delete.")
+        return
+
+    # Display the current tasks before asking
+    # the user which task they want to remove.
+    view_tasks(tasks)
+
+    task_number = int(input("Enter task number to delete: "))
+
+    # Validate that the task number exists in the list.
+    if task_number < 1 or task_number > len(tasks):
+        print("Error: Invalid task number.")
+        return
+
+    # Remove the selected task and display a confirmation message.
+    removed_task = tasks.pop(task_number - 1)
+
+    print('Task "' + removed_task + '" has been removed.')
+
+
+def display_menu():
+    # Display the main menu options for the user.
+    print("============================")
+    print("     TO-DO LIST MENU")
+    print("============================")
+    print("1. Add task")
+    print("2. View tasks")
+    print("3. Delete task")
+    print("4. Quit")
+
+
+def main():
+    # Create an empty list to store all tasks.
+    tasks = []
+
+    # Keep displaying the menu until the user chooses to quit.
+    while True:
+        display_menu()
+
+        choice = input("Enter your choice (1-4): ")
+
+        # Check the user's choice and call the
+        # appropriate function.
+        if choice == "1":
+            add_task(tasks)
+
+        elif choice == "2":
+            view_tasks(tasks)
+
+        elif choice == "3":
+            delete_task(tasks)
+
+        elif choice == "4":
+            # End the program when the user chooses quit.
+            print("Goodbye!")
+            break
+
+        else:
+            # Handle invalid menu choices without crashing.
+            print("Error: Invalid choice. Please select between 1 and 4.")
+
+
+# Start the program by calling the main function.
+main()
