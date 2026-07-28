@@ -55,3 +55,51 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def single_table(number):
+    # This function generates the multiplication table
+    # for a single number from 1 to 12.
+    print("Multiplication Table for", number, ":")
+
+    # Loop through numbers 1 to 12 and multiply
+    # each value by the given number.
+    for i in range(1, 13):
+        print(number, " x ", i, " = ", number * i)
+
+
+def tables_from_one_to_n(n):
+    # This function generates multiplication tables
+    # for all numbers from 1 up to N.
+    for number in range(1, n + 1):
+        print("Multiplication Table for", number, ":")
+
+        # Generate each multiplication table from 1 to 12.
+        for i in range(1, 13):
+            print(number, " x ", i, " = ", number * i)
+
+        # Print a separator after each table
+        # to make the output easier to read.
+        print("---------------------------")
+
+
+def main():
+    # Ask the user to enter the value of N.
+    n = int(input("Enter a positive integer: "))
+
+    # Validate that the entered number is positive.
+    # If it is not positive, display an error message
+    # and stop the program.
+    if n <= 0:
+        print("Error: N must be a positive integer.")
+        return
+
+    # Generate the multiplication table for the entered number.
+    single_table(n)
+
+    print()
+
+    # Generate multiplication tables from 1 to N.
+    tables_from_one_to_n(n)
+
+
+# Start the program by calling the main function.
+main()
