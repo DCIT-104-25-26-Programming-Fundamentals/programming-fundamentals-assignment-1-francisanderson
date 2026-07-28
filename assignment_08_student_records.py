@@ -90,3 +90,156 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def calculate_average(scores):
+    # Create a variable to store the total of all scores.
+    # It starts from 0 because no scores have been added yet.
+    total = 0
+
+    # Loop through every score in the list.
+    # Each score is added to the total one at a time.
+    for score in scores:
+        total = total + score
+
+    # Divide the total score by the number of scores entered.
+    # This gives the average score.
+    average = total / len(scores)
+
+    # Return the average rounded to 2 decimal places.
+    return round(average, 2)
+
+
+def add_student(students):
+    # Ask the user to enter the student's name.
+    name = input("Student name: ")
+
+    # Ask the user to enter the student's ID.
+    # Convert it to an integer because IDs are numbers.
+    student_id = int(input("Student ID: "))
+
+    # Ask how many scores the student has.
+    number_of_scores = int(input("How many scores? "))
+
+    # Create an empty list to store the student's scores.
+    scores = []
+
+    # Loop to collect each score one by one.
+    for i in range(number_of_scores):
+
+        # Ask the user to enter a score.
+        score = int(input(f"Enter score {i + 1}: "))
+
+        # Add the score to the scores list.
+        scores.append(score)
+
+    # Create a dictionary containing the student's information.
+    student = {
+        "name": name,
+        "id": student_id,
+        "scores": scores
+    }
+
+    # Add the student dictionary to the main students list.
+    students.append(student)
+
+    # Confirm that the student was added successfully.
+    print(f'Student "{name}" added successfully.')
+
+
+def display_students(students):
+    # Check if the students list is empty.
+    # If there are no records, display a message and stop the function.
+    if len(students) == 0:
+        print("No students have been added yet.")
+        return
+
+    # Print the table heading.
+    print("-" * 60)
+    print("Name\t\tID\t\tScores\t\tAverage")
+    print("-" * 60)
+
+    # Loop through each student record in the list.
+    for student in students:
+
+        # Calculate the student's average score.
+        average = calculate_average(student["scores"])
+
+        # Convert the scores list into a string for display.
+        scores = ", ".join(map(str, student["scores"]))
+
+        # Display the student's information.
+        print(f'{student["name"]}\t{student["id"]}\t{scores}\t{average}')
+
+    print("-" * 60)
+
+
+def find_student_average(students):
+    # Ask the user for the ID of the student they want to find.
+    student_id = int(input("Enter student ID: "))
+
+    # Loop through every student record.
+    for student in students:
+
+        # Check if the current student's ID matches the entered ID.
+        if student["id"] == student_id:
+
+            # Calculate the student's average score.
+            average = calculate_average(student["scores"])
+
+            # Display the result.
+            print(f'{student["name"]}\'s average score: {average}')
+            return
+
+    # If the loop finishes without finding the student,
+    # the entered ID does not exist.
+    print("Error: Student ID not found.")
+
+
+# Create an empty list to store all student records.
+students = []
+
+
+# Main program loop.
+# The program continues until the user chooses option 4.
+while True:
+
+    print("\n================================")
+    print("   STUDENT RECORD SYSTEM MENU")
+    print("================================")
+    print("1. Add student")
+    print("2. Display all students")
+    print("3. Calculate average score")
+    print("4. Quit")
+
+    # Ask the user to select an option.
+    choice = input("Enter your choice (1-4): ")
+
+    # Check the user's menu choice.
+    if choice == "1":
+
+        # Call the function to add a student.
+        add_student(students)
+
+    elif choice == "2":
+
+        # Call the function to display all students.
+        display_students(students)
+
+    elif choice == "3":
+
+        # Check if there are students before searching.
+        if len(students) == 0:
+            print("No students have been added yet.")
+        else:
+            # Call the function to calculate a student's average.
+            find_student_average(students)
+
+    elif choice == "4":
+
+        # End the program.
+        print("Program ended.")
+        break
+
+    else:
+
+        # Handle invalid menu choices.
+        print("Invalid choice. Please select an option from 1 to 4.")
