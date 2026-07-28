@@ -37,24 +37,23 @@
 
 def is_prime(number):
 
-    # Check if number is less than 2.
-    # Numbers less than 2 cannot be prime, so the function ends and returns False.
-    # if number is not less than 2 function proceeds to next if statement
+    # Check if the number is less than 2.
+    # Numbers less than 2 cannot be prime, so return False.
+    # If the number is 2 or greater, continue to the next condition.
     if number < 2:
         return False
 
-    # Check if number is equal to 2.
-    # 2 is the only even prime number, so the function ends and returns True.
-    # If the number is greater than 2, the function proceeds to the for loop.
+    # Check if the number is equal to 2.
+    # 2 is the only even prime number, so return True.
+    # If the number is greater than 2, continue to the loop.
     if number == 2:
         return True
 
-    # The for loop checks possible divisors starting from (2 up to number - 1)
-    # The number is divided by each possible divisor using the modulus operator (%).
-    # If the remainder is 0, the number has a divisor other than 1 and itself,
-    # so it is not prime and the function returns False.
-    # If the loop finishes without finding any divisor, the number is prime,
-    # so the function returns True.
+    # Check every number from 2 up to (number - 1).
+    # If any number divides evenly into the given number,
+    # then the number is not prime and return False.
+    # If no divisor is found after the loop finishes,
+    # the number is prime and return True.
     for i in range(2, number):
         if number % i == 0:
             return False
@@ -62,13 +61,41 @@ def is_prime(number):
     return True
 
 
-# Take input from the user.
-number = int(input("Enter a number: "))
+def main():
 
-# If the function returns True, print that the number is prime.
-if is_prime(number):
-    print(f"{number} is a prime number.")
+    # Keep the program running until the user chooses to quit.
+    while True:
 
-# If the function returns False, print that the number is not prime.
-else:
-    print(f"{number} is NOT a prime number.")
+        # Try to convert the user's input into an integer.
+        # If the user enters a string or any non-integer value,
+        # int() raises a ValueError.
+        # The except block catches the error so the program
+        # does not crash and instead prints a friendly message.
+        try:
+            number = int(input("Enter a number: "))
+
+            # Call the function and display whether the number is prime.
+            if is_prime(number):
+                print(f"{number} is a prime number.")
+            else:
+                print(f"{number} is NOT a prime number.")
+
+        # This block runs only if the user entered an invalid value,
+        # such as letters, symbols, or a decimal number.
+        except ValueError:
+            print("Error: Please enter a valid integer.")
+
+        # Ask the user whether they want to continue.
+        # Convert the input to uppercase so both
+        # uppercase and lowercase letters are accepted.
+        choice = input("\nDo you want to check another number? (Y/N): ").upper()
+
+        # If the user enters anything other than Y,
+        # end the program with a goodbye message.
+        if choice != "Y":
+            print("Thank you for using the Prime Number Checker. Goodbye!")
+            break
+
+
+# Start the program by calling the main function.
+main()
